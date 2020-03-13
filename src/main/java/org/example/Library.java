@@ -7,4 +7,9 @@ public class Library {
     public boolean someLibraryMethod() {
         return true;
     }
+
+    public int addNumbers(int x, int y) { return x + y;}
+
+    // Intentionally made to fail to show gradle output for test failure
+    public int subtractNumbers(int x, int y) { return x + y;}
 }

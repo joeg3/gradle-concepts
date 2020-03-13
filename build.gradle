@@ -27,3 +27,15 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+
+test {
+    testLogging {
+        // Log result for each test as they run
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+
+        // For test failures, instead of just showing the line number of failure on stdout,
+        // also show assertion on why it failed
+        exceptionFormat = 'full'
+    }
+
+}
