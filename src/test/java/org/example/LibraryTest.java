@@ -3,12 +3,35 @@
  */
 package org.example;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class LibraryTest {
     @Test public void testSomeLibraryMethod() {
         Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
+    }
+
+    @Test
+    public void testAddNumbers() {
+        Library classUnderTest = new Library();
+        assertEquals(5, classUnderTest.addNumbers(2, 3));
+    }
+
+    @Test
+    public void testAlwaysFailsToShowReportingOfTestFailures() {
+        Library classUnderTest = new Library();
+        assertEquals(4, classUnderTest.subtractNumbers(7, 3));
+    }
+
+    @Disabled
+    @Test
+    public void testIgnore() { /* To show reporting of ignored tests */ }
+
+    @Test
+    public void testAlwaysThrowsExceptionToShowReportingOfTestFailuresDueToException() throws Exception {
+        throw new Exception();
     }
 }

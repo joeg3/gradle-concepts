@@ -25,5 +25,26 @@ dependencies {
     implementation 'com.google.guava:guava:28.1-jre'
 
     // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    //testImplementation 'junit:junit:4.12'
+
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+
+    testLogging {
+        // Log result for each test as they run
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+
+        // For test failures, instead of just showing the line number of failure on stdout,
+        // also show assertion on why it failed
+        exceptionFormat = 'full'
+    }
+
 }
