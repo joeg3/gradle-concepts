@@ -3,14 +3,15 @@
  */
 package org.example;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class LibraryTest {
     @Test public void testSomeLibraryMethod() {
         Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
     }
 
     @Test
@@ -25,7 +26,7 @@ public class LibraryTest {
         assertEquals(4, classUnderTest.subtractNumbers(7, 3));
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void testIgnore() { /* To show reporting of ignored tests */ }
 
