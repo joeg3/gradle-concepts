@@ -8,8 +8,17 @@
 - More info: https://docs.gradle.org/current/userguide/build_init_plugin.html
 
 ###  Run tests
-- From command line: `./gradlew clean test`
+- Run all tests from command line: `./gradlew test`
+- Run a single test case: `./gradlew test --tests org.example.LibraryTest.testAddNumbers`
 - From IntelliJ: Create a run configuration for the `test` folder by right-clicking on `src/test` and selecting `Run...`. 
+
+### Miscellaneous Tasks
+- Clear gradle cache: `./gradlew --refresh-dependencies`
+- Clear gradle cache (brute force): `rm -rf $HOME/.gradle/caches`
+
+### Gradle Properties
+- There are a few locations for `gradle.properties` files, see [here](https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties)
+- This example has a `gradle.properties` file in the project root.
 
 ### Other Gradle Concepts To Explore
 - [ ] Look for best way to pass in passwords etc.
@@ -19,4 +28,5 @@
 
 
 ### Helpful Links
+- [More ways to run only some tests from command line](https://docs.gradle.org/current/userguide/java_testing.html#test_filtering)
 - https://linchpiner.github.io/gradle-for-devops-2.html
