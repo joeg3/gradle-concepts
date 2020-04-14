@@ -12,4 +12,8 @@ public class Library {
 
     // Intentionally made to fail to show gradle output for test failure
     public int subtractNumbers(int x, int y) { return x + y;}
+
+    public void printToStdOut() {
+        System.out.println("In Library.printToStdOut()");
+    }
 }

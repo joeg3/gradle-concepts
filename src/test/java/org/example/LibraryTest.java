@@ -3,35 +3,44 @@
  */
 package org.example;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class LibraryTest {
-    @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
+    public static final String PLATFORM = System.getProperty("platform"); // Set on cmd line: -Pplatform=some_value
+    private Library sut;
+
+    @BeforeEach
+    void beforeEachTest() {
+        sut = new Library();
     }
 
     @Test
-    public void testAddNumbers() {
-        Library classUnderTest = new Library();
-        assertEquals(5, classUnderTest.addNumbers(2, 3));
+    void testSomeLibraryMethod() {
+        assertTrue(sut.someLibraryMethod(), "someLibraryMethod should return 'true'");
     }
 
     @Test
-    public void testAlwaysFailsToShowReportingOfTestFailures() {
-        Library classUnderTest = new Library();
-        assertEquals(4, classUnderTest.subtractNumbers(7, 3));
+    void testAddNumbers() {
+        assertEquals(5, sut.addNumbers(2, 3));
+    }
+
+    @Test
+    void readProperties() {
+        System.out.println("PLATFORM property = |" + PLATFORM + "|");
+        assertTrue("test".equals(PLATFORM) || "staging".equals(PLATFORM));
     }
 
     @Disabled
     @Test
-    public void testIgnore() { /* To show reporting of ignored tests */ }
+    void testIgnore() { /* To show reporting of ignored tests */ }
 
     @Test
-    public void testAlwaysThrowsExceptionToShowReportingOfTestFailuresDueToException() throws Exception {
-        throw new Exception();
+    void testShowStdOut() {
+        sut.printToStdOut();
+        System.out.println("In LibraryTest.testShowStdOut()");
+        System.out.println("If 'showStandardStreams = true' is in build.gradle, should see this line");
     }
 }
