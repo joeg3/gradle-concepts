@@ -6,13 +6,15 @@ repositories {
     jcenter() // Repository from which we retrieve dependency libraries
 }
 
-dependencies { // The dependencies for building/testing/running code ni this build
+dependencies { // The dependencies for building/testing/running code in this build
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform { // Set system property 'platform' to value of cmd line arg -Pplatform=some_value, otherwise default value 'test'
+        systemProperty "platform", project.hasProperty("platform") ? project.getProperty("platform") : "test"
+    }
 
     dependsOn 'cleanTest' // Always run tests, even when nothing changed.
 
@@ -22,10 +24,6 @@ test {
 
         exceptionFormat = 'full' // For test failures, show assertion on why it failed instead of just the line number of failure
         showStandardStreams = true // Show stdout and stderr of tests on console
-
-        // I think another way to show stdout/stderr is to put the following in
-        // gradle.properties either in the project or in ~/.gradle/gradle.properties
-        //systemProp.override.test.testLogging.info.showStandardStreams=true
     }
 
     // Show summary of test run

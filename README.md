@@ -8,7 +8,9 @@
 - More info: https://docs.gradle.org/current/userguide/build_init_plugin.html
 
 ###  Run tests
-- Run all tests from command line: `./gradlew test`
+- Run all tests from command line: `./gradlew test`. This will use the default value of 'test' for system property `platform`
+- Run with specifying 'staging' for system property: `./gradlew test -Pplatform=staging`
+- The `readProperties()` testcase will fail if you specify the `platform` system property as anything other than 'staging' or 'test'.
 - Run a single test case: `./gradlew test --tests org.example.LibraryTest.testAddNumbers`
 - From IntelliJ: Create a run configuration for the `test` folder by right-clicking on `src/test` and selecting `Run...`. 
 
