@@ -12,8 +12,9 @@ dependencies { // The dependencies for building/testing/running code in this bui
 }
 
 test {
-    useJUnitPlatform { // Set system property 'platform' to value of cmd line arg -Pplatform=some_value, otherwise default value 'test'
-        systemProperty "platform", project.hasProperty("platform") ? project.getProperty("platform") : "test"
+    useJUnitPlatform {
+        // Default value for platform in gradle.properties, or override on command line: -Pplatform=some_value
+        systemProperty "platform", project.getProperty("platform")
     }
 
     dependsOn 'cleanTest' // Always run tests, even when nothing changed.
