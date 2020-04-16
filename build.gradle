@@ -15,6 +15,9 @@ test {
     useJUnitPlatform {
         // Default value for platform in gradle.properties, or override on command line: -Pplatform=some_value
         systemProperty "platform", project.getProperty("platform")
+        if (project.getProperty("platform") != "test" && project.getProperty("platform") != "staging") {
+            throw new InvalidUserDataException("GRADLE ERROR: Platform Property is '" + project.getProperty("platform") + "', but should be 'staging' or 'test'.");
+        }
     }
 
     dependsOn 'cleanTest' // Always run tests, even when nothing changed.
