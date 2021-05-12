@@ -3,14 +3,26 @@
  */
 package org.example;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
+import java.io.IOException;
+import java.util.Properties;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTest {
     public static final String PLATFORM = System.getProperty("platform"); // Set on cmd line: -Pplatform=some_value
+    private static String BASE_URI;
+    private static String USERNAME;
     private Library sut;
+
+    @BeforeAll
+    static void beforeAllTestsInThisClass() throws IOException {
+        Properties properties = new Properties();
+        properties.load(ClassLoader.getSystemResourceAsStream("config.properties"));
+        BASE_URI = properties.getProperty(PLATFORM + ".base.uri");
+        USERNAME = properties.getProperty(PLATFORM + ".username");
+    }
 
     @BeforeEach
     void beforeEachTest() {
@@ -28,9 +40,29 @@ public class LibraryTest {
     }
 
     @Test
-    void readProperties() {
+    void testGradleProjectProperties() {
+        // This test is superfluous
+        // The Gradle script should have already verified the platform is either 'test' or 'staging'
         System.out.println("PLATFORM property = |" + PLATFORM + "|");
         assertTrue("test".equals(PLATFORM) || "staging".equals(PLATFORM));
+    }
+
+    @Tag("it")
+    @Test
+    void expensiveIntegrationTest() {
+
+    }
+
+    @Test
+    @DisplayName("Verify correct config based on platform property passed into Gradle")
+    void testConfigProperties() {
+        if (PLATFORM.equals("test")) {
+            assertEquals("https://test.example.org", BASE_URI);
+            assertEquals("matilda", USERNAME);
+        } else {
+            assertEquals("https://staging.example.org", BASE_URI);
+            assertEquals("barney", USERNAME);
+        }
     }
 
     @Disabled

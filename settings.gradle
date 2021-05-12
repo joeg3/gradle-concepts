@@ -7,4 +7,6 @@
  * in the user manual at https://docs.gradle.org/6.2.2/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'gradle-concepts'
+// By default, the name of the generated jar file is same as project root folder
+// Set rootProject.name to assign a different name
+rootProject.name = 'gradle-demo'
