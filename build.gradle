@@ -2,8 +2,11 @@ plugins {
     id 'java-library' // Adds Java compiling, testing, bundling capabilities to this build project
 }
 
+version = '0.1.0' // Optionally add version number to generated jar file name
+sourceCompatibility = '11'
+
 repositories {
-    jcenter() // Repository from which we retrieve dependency libraries
+    mavenCentral() // Repository from which we retrieve dependency libraries
 }
 
 dependencies { // The dependencies for building/testing/running code in this build
@@ -14,10 +17,22 @@ dependencies { // The dependencies for building/testing/running code in this bui
 test {
     useJUnitPlatform {
         // Default value for platform in gradle.properties, or override on command line: -Pplatform=some_value
-        systemProperty "platform", project.getProperty("platform")
-        if (project.getProperty("platform") != "test" && project.getProperty("platform") != "staging") {
-            throw new InvalidUserDataException("GRADLE ERROR: Platform Property is '" + project.getProperty("platform") + "', but should be 'staging' or 'test'.");
+        def platformProp = platform // Kills build if 'platform' property doesn't exist
+
+        if (platformProp != "test" && platformProp != "staging") {
+            throw new InvalidUserDataException("GRADLE ERROR: Platform Property is '" + platformProp + "', but should be 'staging' or 'test'.");
         }
+        systemProperty "platform", project.getProperty("platform") // Set system property so we can access property in Java code
+
+        // You can run only tests tagged as 'it' for integration tests
+        if (project.hasProperty('type') && project.getProperty('type') == 'it') {
+            includeTags 'it'
+            excludeTags 'unit' // We don't have tests tagged with 'unit', just showing it's possible to exclude tests too
+        }
+
+        println "##########################################################"
+        println "   Starting Gradle Demo Test on platform: " + platformProp
+        println "##########################################################"
     }
 
     dependsOn 'cleanTest' // Always run tests, even when nothing changed.
