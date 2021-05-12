@@ -51,18 +51,10 @@ For this project, I set a default value of `platform=test` in the project `gradl
 - Override the default, specifying 'staging' for project property: `./gradlew test -Pplatform=staging`
 - Run a single test case: `./gradlew test --tests org.example.LibraryTest.testAddNumbers`
 - Run all tests in a class: `./gradlew test --tests org.example.LibraryTest`
+- Run only tests tagged with `it` (integration tests): `./gradlew build -Ptype=it`   
 - From IntelliJ: Create a run configuration for the `test` folder by right-clicking on `src/test` and selecting `Run...`. 
 
 ### Miscellaneous Tasks
 - See what tasks you can run: `./gradlew tasks`
 - Clear gradle cache: `./gradlew --refresh-dependencies`
 - Clear gradle cache (brute force): `rm -rf $HOME/.gradle/caches`
-
-### Other Gradle Concepts To Explore
-- [ ] Decide on the best place for the config that will reside in a file. The current location of `src/test/resources/config.properties`, or `gradle.properties` or somewhere else? Regardless, some properties will probably have to be passed in via command line or environment varialbe.
-- [ ] Look into printing a summary of test run: [One option](https://medium.com/@wasyl/pretty-tests-summary-in-gradle-744804dd676c)
-
-
-### Helpful Links
-- [More ways to run only some tests from command line](https://docs.gradle.org/current/userguide/java_testing.html#test_filtering)
-- https://linchpiner.github.io/gradle-for-devops-2.html
