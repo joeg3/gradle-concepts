@@ -7,7 +7,6 @@
 - Properties can be expressed as command line parameters, environment variables, or in Gradle property files
 - The script, builds a jar file with version number, runs test cases and generates reports
 - A subset of testcases can be run based on tag
-- Checkstyle and SpotBugs plugins are used
 
 ### Create a Gradle skeleton project using the `gradle init` command
 - Install `gradle`. I used [Homebrew](https://brew.sh/) to do it.
